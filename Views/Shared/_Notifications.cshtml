@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ECommerce.Entities.Identity
+@inject UserManager<ShopUser> UserManager
+@{
+    var list = NotificationWorker.GetNotifications(UserManager.GetUserId(User)).ToList();
+}
+<div class="topbar nav-icon position-relative text-decoration-none dropdown">
+    <a class="text-decoration-none dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bell fa-2x"></i>
+    </a>
+    <span class="badge bg-danger badge-counter">@list.Count()</span>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+        <h6 class="dropdown-header">Notification Center</h6>
+        @foreach (var item in list.Take(10))
+        {
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="me-3">
+                        <div class="icon-circle bg-@item.Status">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">@item.CreateDate.ToShortDateString() @item.CreateDate.ToShortTimeString()</div>
+                        <span class="font-weight-bold">@item.Title</span>
+                    </div>
+                </a>
+            </li>
+        }
+        <li><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a></li>
+    </ul>
+</div>

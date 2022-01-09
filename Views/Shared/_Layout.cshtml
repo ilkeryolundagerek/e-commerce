@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="/assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
+    <style>
+        .badge-counter {
+            position: absolute;
+            transform: scale(.7);
+            transform-origin: top right;
+            right: -0.35rem;
+            margin-top: -0.35rem;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .icon-circle {
+            height: 2.5rem;
+            width: 2.5rem;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-gray-500 {
+            color: #b7b9cc !important;
+        }
+
+        .small, small {
+            font-size: 80%;
+            font-weight: 400;
+        }
+
+        .font-weight-bold {
+            font-weight: 700 !important;
+        }
+        .topbar .dropdown-menu .dropdown-item {
+            white-space: normal;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-left: 1px solid #e3e6f0;
+            border-right: 1px solid #e3e6f0;
+            border-bottom: 1px solid #e3e6f0;
+            line-height: 1.3rem;
+        }
+        .topbar .dropdown-menu {
+            width: 20rem !important;
+        }
+    </style>
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <partial name="_Header" />
+    @RenderBody()
+    <partial name="_Footer" />
+    <!-- Start Script -->
+    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/templatemo.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <!-- End Script -->
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

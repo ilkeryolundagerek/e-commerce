@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ShopUser> SignInManager
+@{
+    if (SignInManager.IsSignedIn(User))
+    {
+        Layout = "/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/Account/_Layout.cshtml";
+    }
+}
