@@ -32,6 +32,9 @@ namespace ECommerce
                 .AddRazorPages();
 
             services
+                .AddDbContext<ShopContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Shop")));
+
+            services
                 .AddDbContext<IdentityContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Identity")));
 
             services

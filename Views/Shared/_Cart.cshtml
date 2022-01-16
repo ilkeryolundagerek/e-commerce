@@ -1,4 +1,32 @@
-﻿<a class="nav-icon position-relative text-decoration-none" href="#">
-    <i class="fa fa-fw fa-cart-arrow-down fa-2x"></i>
-    <span class="badge bg-danger badge-counter">7</span>
-</a>
+﻿@using Microsoft.AspNetCore.Identity
+@using ECommerce.Entities.Identity
+@inject UserManager<ShopUser> UserManager
+@{
+    var list = CartWorker.getItems(UserManager.GetUserId(User));
+}
+<div class="topbar nav-icon position-relative text-decoration-none dropdown">
+    <a class="text-decoration-none dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-fw fa-cart-arrow-down fa-2x"></i>
+    </a>
+    <span class="badge bg-danger badge-counter">@list.Count()</span>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+        <h6 class="dropdown-header">Shoping Cart</h6>
+        @foreach (var item in list)
+        {
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="me-3">
+                        <div class="icon-circle border-1">
+                            <img src="@item.Image" class="img-thumbnail" />
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-weight-bold">@item.ProductName</span>
+                        <div class="small text-gray-500">@item.Quantity x @item.Price</div>
+                    </div>
+                </a>
+            </li>
+        }
+        <li><a class="dropdown-item text-center small text-gray-500" href="#">Cart Detail</a></li>
+    </ul>
+</div>

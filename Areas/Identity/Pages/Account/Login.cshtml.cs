@@ -82,7 +82,7 @@ namespace ECommerce.Areas.Identity.Pages.Account
                 {
                     var u = _userManager.Users.Where(x => x.UserName.Equals(Input.Email)).FirstOrDefault();
                     _logger.LogInformation("User logged in.");
-                    NotificationWorker.Success("Login", "User logged in.");
+                    NotificationWorker.Success("Login", "User logged in.",u.Id);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

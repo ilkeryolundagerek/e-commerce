@@ -43,6 +43,11 @@ namespace ECommerce.Workers
             Create("info", title, detail, uid);
         }
 
+        public static void Default(string title, string detail, string uid = null)
+        {
+            Create("primary", title, detail, uid);
+        }
+
         private static void Create(string status, string title, string detail, string uid = null)
         {
             Notification n = new Notification

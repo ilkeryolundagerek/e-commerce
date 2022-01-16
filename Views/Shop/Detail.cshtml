@@ -1,5 +1,8 @@
-﻿@{
+﻿@model ShopDetailViewModel
+@{
     ViewBag.Title = "Shop Detail";
+    var medias = Model.Product.Galery.MediaLibrary;
+    int group_cnt = (medias.Count() % 3) == 0 ? medias.Count() / 3 : medias.Count() / 3 + 1;
 }
 @section Styles{
     <!-- Slick -->
@@ -50,7 +53,7 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3">
-                    <img class="card-img img-fluid" src="/assets/img/product_single_10.jpg" alt="Card image cap" id="product-detail">
+                    <img class="card-img img-fluid" src="@medias.FirstOrDefault().Image" alt="Card image cap" id="product-detail">
                 </div>
                 <div class="row">
                     <!--Start Controls-->
@@ -65,70 +68,21 @@
                     <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
                         <!--Start Slides-->
                         <div class="carousel-inner product-links-wap" role="listbox">
-
-                            <!--First slide-->
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_01.jpg" alt="Product Image 1">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_02.jpg" alt="Product Image 2">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_03.jpg" alt="Product Image 3">
-                                        </a>
+                            @for (int i = 0; i < group_cnt; i++)
+                            {
+                                <div class="carousel-item @Html.Raw(i==0?"active":"")">
+                                    <div class="row">
+                                        @foreach (var media in medias.Skip(i * 3).Take(3))
+                                        {
+                                            <div class="col-4">
+                                                <a href="#">
+                                                    <img class="card-img img-fluid" src="@media.Image" alt="@media.Title">
+                                                </a>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                            <!--/.First slide-->
-                            <!--Second slide-->
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_04.jpg" alt="Product Image 4">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_05.jpg" alt="Product Image 5">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_06.jpg" alt="Product Image 6">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/.Second slide-->
-                            <!--Third slide-->
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_07.jpg" alt="Product Image 7">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_08.jpg" alt="Product Image 8">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="/assets/img/product_single_09.jpg" alt="Product Image 9">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/.Third slide-->
+                            }
                         </div>
                         <!--End Slides-->
                     </div>
@@ -147,8 +101,16 @@
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="h2">Active Wear</h1>
-                        <p class="h3 py-2">$25.00</p>
+                        <h1 class="h2">@Model.Product.Title</h1>
+                        @if (@Model.Product.IsInCampaign)
+                        {
+                            <p class="h3 py-2 text-muted"><del>₺@Model.Product.Price</del></p>
+                            <p class="h3 py-2">₺@Model.Product.CampaingPrice</p>
+                        }
+                        else
+                        {
+                            <p class="h3 py-2">₺@Model.Product.Price</p>
+                        }
                         <p class="py-2">
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
@@ -162,12 +124,12 @@
                                 <h6>Brand:</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>Easy Wear</strong></p>
+                                <p class="text-muted"><strong>@Model.Product.SubCategory.Category.Title / @Model.Product.SubCategory.Title</strong></p>
                             </li>
                         </ul>
 
                         <h6>Description:</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
+                        <p>@Model.Product.Description</p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <h6>Avaliable Color :</h6>
