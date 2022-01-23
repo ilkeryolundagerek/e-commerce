@@ -22,5 +22,14 @@ namespace ECommerce.Models
                         .OrderByDescending(x => x.CreateDate));
         }
 
+        public ShopIndexViewModel(string term, int page = 1, int page_size = 9)
+        {
+            categories = new CategorySideBarViewModel();
+            var src_result = repo
+                        .ReadAll(x => x.Active && !x.Deleted)
+                        .OrderByDescending(x => x.CreateDate)
+                        .Where(x => x.Title.ToLower().Contains(term.ToLower()) || x.Description.ToLower().Contains(term.ToLower()));
+            pagination = new Pagination<Product>(page, page_size, src_result);
+        }
     }
 }

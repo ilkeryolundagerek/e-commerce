@@ -19,9 +19,16 @@ namespace ECommerce.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index(int page = 1, int page_size = 9)
+        public IActionResult Index(string term = null, int page = 1, int page_size = 9)
         {
-            return View(new ShopIndexViewModel(page, page_size));
+            if (string.IsNullOrEmpty(term))
+            {
+                return View(new ShopIndexViewModel(page, page_size));
+            }
+            else
+            {
+                return View(new ShopIndexViewModel(term, page, page_size));
+            }
         }
 
         public IActionResult Detail(int? id)
