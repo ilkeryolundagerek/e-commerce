@@ -21,5 +21,7 @@ namespace ECommerce.Data
             string cs = "Server=.\\sqlexpress;Database=ZayID;User Id=sa;Password=1;";
             return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), cs).Options;
         }
+
+        public DbSet<ECommerce.Entities.Identity.UserRoles> UserRoles { get; set; }
     }
 }

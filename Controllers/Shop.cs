@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
 {
-    public class Shop : Controller
+    public class Shop : BaseController
     {
         private readonly UserManager<ShopUser> userManager;
 

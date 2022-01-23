@@ -76,6 +76,10 @@ namespace ECommerce
                     defaults: new { controller = "Home", action = "Contact" }
                     );
                 route.MapRoute(
+                      name: "areas",
+                      template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
+                route.MapRoute(
                     name: "Default",
                     template: "{Controller=Home}/{Action=Index}/{id?}"
                     );
