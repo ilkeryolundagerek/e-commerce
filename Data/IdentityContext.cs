@@ -18,7 +18,7 @@ namespace ECommerce.Data
 
         private static DbContextOptions GetOptions()
         {
-            string cs = "Server=.\\sqlexpress;Database=ZayID;User Id=sa;Password=1;";
+            string cs = "Server=.;Database=ZayID;User Id=sa;Password=1234;";
             return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), cs).Options;
         }
 

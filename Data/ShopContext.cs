@@ -21,7 +21,7 @@ namespace ECommerce.Data
 
         private static DbContextOptions GetOptions()
         {
-            string cs = "Server=.\\sqlexpress;Database=ZayDB;User Id=sa;Password=1;";
+            string cs = "Server=.;Database=ZayDB;User Id=sa;Password=1234;";
             return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), cs).Options;
         }
 
