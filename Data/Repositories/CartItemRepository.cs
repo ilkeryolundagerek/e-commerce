@@ -49,7 +49,7 @@ namespace ECommerce.Data.Repositories
         public IQueryable<CartItem> GetCartItems(string uid)
         {
             Cart cart = cartRepository.GetCart(uid);
-            return base.ReadAll(x => x.CartId.Equals(cart.Id)).Include(x=>x.Product);
+            return base.ReadAll(x => x.CartId.Equals(cart.Id)).Include(x=>x.Product).ThenInclude(x=>x.SubCategory);
         }
     }
 }
