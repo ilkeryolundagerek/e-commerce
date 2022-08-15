@@ -28,7 +28,8 @@ namespace ECommerce.Controllers
             {
                 isAreaDashboard = context.RouteData.Values["area"].ToString().ToLower().Equals("dashboard");
             }
-            return User.Identity.IsAuthenticated ? User.IsInRole("Admin") || !isAreaDashboard : !isAreaDashboard;
+            bool isInRole = User.IsInRole("Admin");
+            return User.Identity.IsAuthenticated ? isInRole || !isAreaDashboard : !isAreaDashboard;
             /*
             if (User.Identity.IsAuthenticated)
             {

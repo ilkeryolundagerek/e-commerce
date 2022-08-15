@@ -1,4 +1,5 @@
 ﻿using ECommerce.Data.Repositories;
+using ECommerce.Entities.Shop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,11 @@ namespace ECommerce.Workers
         public static void AddToCart(int pid,string uid)
         {
             cartItemRepo.AddCartItem(pid, uid);
+        }
+
+        public static IQueryable<CartItem> GetCartItems(string uid)
+        {
+            return cartItemRepo.GetCartItems(uid);
         }
     }
 

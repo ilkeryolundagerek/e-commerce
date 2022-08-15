@@ -13,7 +13,7 @@ using ECommerce.Controllers;
 namespace ECommerce.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-    public class RolesController : BaseController
+    public class RolesController : Controller
     {
         private readonly RoleManager<ShopRole> _roleManager;
 

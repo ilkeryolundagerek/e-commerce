@@ -8,17 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using ECommerce.Data;
 using ECommerce.Entities.Identity;
 using ECommerce.Controllers;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-    public class UserRolesController : BaseController
+    public class UserRolesController : Controller
     {
         private readonly IdentityContext _context;
-
-        public UserRolesController(IdentityContext context)
+        private readonly RoleManager<ShopRole> _roleManager;
+        private readonly UserManager<ShopUser> _userManager;
+        public UserRolesController(IdentityContext context, RoleManager<ShopRole> roleManager, UserManager<ShopUser> userManager)
         {
             _context = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         // GET: Dashboard/UserRoles
@@ -48,6 +52,8 @@ namespace ECommerce.Areas.Dashboard.Controllers
         // GET: Dashboard/UserRoles/Create
         public IActionResult Create()
         {
+            ViewBag.UserId = new SelectList(_context.Users,"Id", "UserName");
+            ViewBag.RoleId = new SelectList(_context.Roles, "Name", "Name");
             return View();
         }
 
@@ -60,8 +66,8 @@ namespace ECommerce.Areas.Dashboard.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userRoles);
-                await _context.SaveChangesAsync();
+                ShopUser user = await _userManager.GetUserAsync(User);
+                await _userManager.AddToRoleAsync(user, userRoles.RoleId);
                 return RedirectToAction(nameof(Index));
             }
             return View(userRoles);

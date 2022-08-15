@@ -42,5 +42,11 @@ namespace ECommerce.Controllers
             CartWorker.AddToCart(pid, uid);
             return RedirectToAction("Index");
         }
+
+        public IActionResult CartDetail()
+        {
+            string uid = userManager.GetUserId(User);
+            return View(new CartDetailViewModel(uid));
+        }
     }
 }
